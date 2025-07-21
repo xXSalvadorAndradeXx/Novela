@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 1: Deseos de un nuevo comienzo | Tamashii no Ibuki</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<style>
+    :root {
+        --primary-color: #1a1a2e;
+        --secondary-color: #16213e;
+        --accent-color: #e94560;
+        --accent-light: #f39c12;
+        --text-primary: #ffffff;
+        --text-secondary: #b4b4b4;
+        --sakura-pink: #ffb7c5;
+        --gold: #ffd700;
+        --gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        --card-bg: rgba(255, 255, 255, 0.05);
+        --card-border: rgba(255, 255, 255, 0.1);
+        --shadow-primary: 0 20px 40px rgba(0, 0, 0, 0.3);
+        --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: var(--gradient-bg);
+        color: var(--text-primary);
+        line-height: 1.7;
+        overflow-x: hidden;
+    }
+
+    /* Sakura Animation */
+    #sakura-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .sakura-petal {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: var(--sakura-pink);
+        border-radius: 50% 0 50% 0;
+        opacity: 0.7;
+        animation: sakura-fall 15s linear infinite;
+        transform-origin: center;
+    }
+
+    .sakura-petal::before {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: var(--sakura-pink);
+        border-radius: 50% 0 50% 0;
+        transform: rotate(90deg);
+        opacity: 0.8;
+    }
+
+    @keyframes sakura-fall {
+        0% {
+            transform: translateY(-100vh) rotate(0deg) translateX(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) rotate(360deg) translateX(100px);
+            opacity: 0;
+        }
+    }
+
+    /* Header */
+    header {
+        top :80px;
+        height: 40vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 60px;
+    }
+
+    .header-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .header-content h1 {
+        font-family: 'Noto Serif JP', serif;
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--text-primary);
+        position: relative;
+    }
+
+    .header-content h1 span {
+        display: block;
+        font-size: 0.6em;
+        margin-top: 10px;
+        opacity: 0.8;
+        font-weight: 400;
+    }
+
+    /* Navigation */
+    nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+        padding: 15px 0;
+        backdrop-filter: blur(20px);
+        background: rgba(26, 26, 46, 0.9);
+        border-bottom: 1px solid var(--card-border);
+        transition: all 0.3s ease;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .novel-title {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.2rem;
+        font-family: 'Noto Serif JP', serif;
+    }
+
+    .back-button {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 20px;
+        background: rgba(233, 69, 96, 0.2);
+        border: 1px solid var(--accent-color);
+        transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+        background: var(--accent-color);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
+    }
+
+    /* Chapter Container */
+    .chapter-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px 60px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .chapter-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .chapter-header h2 {
+        font-family: 'Noto Serif JP', serif;
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        color: var(--text-primary);
+    }
+
+    .chapter-date {
+        color: var(--accent-light);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    /* Chapter Content */
+    .chapter-content {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 15px;
+        padding: 30px;
+        backdrop-filter: blur(10px);
+    }
+
+    .chapter-text p {
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+
+    /* Dialogue Styles */
+    .dialogue {
+        margin: 25px 0;
+        padding-left: 20px;
+        border-left: 3px solid var(--accent-color);
+    }
+
+    .character-name {
+        font-weight: 700;
+        color: var(--accent-light);
+        margin-bottom: 5px;
+        font-family: 'Noto Serif JP', serif;
+    }
+
+    .dialogue p {
+        margin-bottom: 0;
+    }
+
+    /* Action and Thought Styles */
+    .action {
+        font-style: italic;
+        color: var(--text-secondary);
+        margin: 20px 0;
+        padding-left: 15px;
+    }
+
+    .thought {
+        font-style: italic;
+        color: var(--sakura-pink);
+        margin: 20px 0;
+        padding-left: 15px;
+    }
+
+    /* Section Breaks */
+    .section-break {
+        text-align: center;
+        margin: 40px 0;
+        color: var(--accent-color);
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    /* Chapter Navigation */
+    .chapter-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+    }
+
+    .nav-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 25px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        color: var(--text-primary);
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+        background: linear-gradient(45deg, var(--accent-color), var(--accent-light));
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-primary);
+    }
+
+    .nav-button.next {
+        margin-left: auto;
+    }
+
+    /* Reading Mode */
+    .reading-mode {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--primary-color);
+        z-index: 1000;
+        padding: 60px;
+        overflow-y: auto;
+        display: none;
+    }
+
+    .reading-mode.active {
+        display: block;
+    }
+
+    .close-reading-mode {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 1001;
+    }
+
+    .reading-mode-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+        transition: all 0.3s ease;
+    }
+
+    .reading-mode-btn:hover {
+        transform: scale(1.1);
+        background: var(--accent-light);
+    }
+
+    /* Footer */
+    footer {
+        background: var(--secondary-color);
+        padding: 30px 20px;
+        text-align: center;
+        border-top: 1px solid var(--card-border);
+    }
+
+    .copyright {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    /* Japanese decorations */
+    .japanese-decoration {
+        position: fixed;
+        pointer-events: none;
+        opacity: 0.1;
+        z-index: 1;
+    }
+
+    .decoration-1 {
+        top: 20%;
+        left: -5%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, var(--accent-color), transparent);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        header {
+            height: 30vh;
+            margin-bottom: 40px;
+        }
+
+        .chapter-container {
+            padding: 0 15px 40px;
+        }
+
+        .chapter-header h2 {
+            font-size: 1.8rem;
+        }
+
+        .chapter-content {
+            padding: 20px;
+        }
+
+        .reading-mode {
+            padding: 20px;
+        }
+
+        .chapter-navigation {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-button {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<script>
+    // Sakura petals animation
+    function createSakura() {
+        const sakuraContainer = document.getElementById('sakura-container');
+        const petal = document.createElement('div');
+        petal.classList.add('sakura-petal');
+        
+        // Random position
+        petal.style.left = Math.random() * 100 + 'vw';
+        
+        // Random size
+        const size = Math.random() * 15 + 5;
+        petal.style.width = size + 'px';
+        petal.style.height = size + 'px';
+        
+        // Random animation duration
+        petal.style.animationDuration = Math.random() * 10 + 10 + 's';
+        
+        // Random delay
+        petal.style.animationDelay = Math.random() * 5 + 's';
+        
+        sakuraContainer.appendChild(petal);
+        
+        // Remove petal after animation ends
+        setTimeout(() => {
+            petal.remove();
+        }, 20000);
+    }
+
+    // Create sakura petals periodically
+    setInterval(createSakura, 300);
+
+    // Reading mode functionality
+    const readingModeBtn = document.getElementById('reading-mode-btn');
+    const readingMode = document.getElementById('reading-mode');
+    const closeReadingMode = document.getElementById('close-reading-mode');
+    const readingContent = document.getElementById('reading-content');
+    const chapterText = document.querySelector('.chapter-text');
+
+    readingModeBtn.addEventListener('click', () => {
+        readingContent.innerHTML = chapterText.innerHTML;
+        readingMode.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    closeReadingMode.addEventListener('click', () => {
+        readingMode.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('nav');
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(26, 26, 46, 0.95)';
+            navbar.style.padding = '10px 0';
+        } else {
+            navbar.style.background = 'rgba(26, 26, 46, 0.9)';
+            navbar.style.padding = '15px 0';
+        }
+    });
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Create initial sakura petals
+    document.addEventListener('DOMContentLoaded', function() {
+        for (let i = 0; i < 20; i++) {
+            createSakura();
+        }
+    });
+</script>
+<body>
+    <!-- Efecto de pétalos de sakura -->
+    <div id="sakura-container"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1>Capítulo 1 <span>魂の息吹</span></h1>
+        </div>
+    </header>
+
+    <!-- Menú de navegación -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="novel-title">Tamashii no Ibuki</a>
+            <a href="/index.html" class="back-button"><i class="fas fa-arrow-left"></i> Volver</a>
+        </div>
+    </nav>
+
+    <!-- Contenido del capítulo -->
+    <div class="chapter-container" id="page-content">
+        <div class="chapter-header">
+            <h2>Deseos de un nuevo comienzo</h2>
+            <div class="chapter-date">08/01/2021 - 2 días antes del examen de admisión</div>
+        </div>
+
+        <div class="chapter-content">
+            <div class="chapter-text">
+                <p>Taiki Agatzuma, 22 Años, joven trabajador del sur de Japón, vive con su familia, Padre: Tadara Kadashi y Madre: Hinata Agatzuma.</p>
+                
+                <p>Taiki es hijo único, trabaja en el campo, en unos días la prestigiosa Universidad Tamashi, abrirá las puertas para los nuevos estudiantes y Taiki quiere ser uno de ellos.</p>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>Mamá, Papá en unos días se abrirá las inscripciones para el ingreso a la universidad Tamashi.</p>
+                </div>
+                
+                <div class="action">Los padres de Taiki solo se voltean a ver de manera preocupada, porque ellos no querían que su hijo se fuera lejos de ellos.</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Hinata</div>
+                    <p>Hijo… ¿estás seguro de que quieres ir tan lejos a vivir?</p>
+                </div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Tadara</div>
+                    <p>Es verdad Taiki, tu madre tiene razón, irte a la capital creo que es muy arriesgado, hay todo tipo de peligros.</p>
+                </div>
+                
+                <div class="action">Ambos padres miran fijamente a Taiki de manera preocupante, ya que estos 2 temían que le pasara algo a su hijo, ya que, en los últimos días en la Capital, habían pasado un sinfín de desastres.</div>
+                
+                <div class="action">Taiki de media vuelta y exclama de manera emotiva…</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>¡¡¡Desde que tengo memoria, entrar y ser parte de La Universidad Tamashi ha sido mi sueño y nada ni nadie puede evitar que yo cumpla mis sueños de estudiar ahí!!!</p>
+                </div>
+                
+                <div class="action">Los Padres de Taiki se miran mutuamente de una manera de aceptación y el padre exclama de manera forzada</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Tadara</div>
+                    <p>Esta bien, solo prométeme que te vas a cuidar…</p>
+                </div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>¡Lo prometo!</p>
+                </div>
+                
+                <div class="action">Esa noche Taiki no pudo dormir, tenían los nervios como si fuera a declarar su amor, pero bueno los jóvenes de hoy en día…</div>
+                
+                <div class="section-break">***</div>
+                
+                <div class="chapter-date">09/01/2021 - Un día antes del Examen de Admisión</div>
+                
+                <p>Taiki llega a la Capital y no lleva ni 2 segundo cuando ya se perdió…</p>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>Enserio!! Acabo de llegar a la capital y ya me perdí, no llevo ni una hora acá… y así quiero sacar mi carrera…</p>
+                </div>
+                
+                <div class="action">Después de un rato de andar dando vueltas como tonto, nuestro protagonista encuentra donde hospedarse, algo bastante simple, ya no que tienes mucho dinero…</p>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>Bueno es pequeño, pero por lómenos estaré bajo techo esta noche… - nunca me imaginé que estaría acá, La Capital…</p>
+                </div>
+                
+                <div class="action">(gesto de decepción y tristeza)</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>Tratare de dormir, primero donde pongo mi futón… es verdad, no tengo futón… como se me olvido empacar uno… esta noche será larga…</p>
+                </div>
+                
+                <div class="action">Nuestro protagonista paso toda la noche despierto…</p>
+                
+                <div class="section-break">***</div>
+                
+                <div class="chapter-date">10/01/2021 - Examen de Admisión</div>
+                
+                <div class="action">Al día siguiente…</div>
+                
+                <p>Taiki se da una bañada y prepara todo para el examen, sale del departamento en camino a la Universidad.</p>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>Muy bien mundo, Taiki Agatzuma ha llegado y demostrara de que este hecho… Ahora solo… ¿hacia dónde está la Universidad? Porque tengo tan mala suerte; exclamo de manera triste.</p>
+                </div>
+                
+                <div class="action">Después de 2 horas buscando la universidad, Taiki llega a la Universidad.</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>quien lo diría, la universidad estaba cruzando la calle…</p>
+                </div>
+                
+                <div class="action">Si Taiki había recorrido toda la capital buscando la universidad, cuando realmente estaba frente, donde se había hospedado…</div>
+                
+                <p>Después de un tedioso papeleo, Taiki se prepara para el gran examen</p>
+                
+                <div class="section-break">Universidad Tamashi – Salón 5 – examen de admisión</div>
+                
+                <div class="action">Le entre entregan el examen a Taiki…</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>5 páginas!!! Exclama de manera nerviosa.</p>
+                </div>
+                
+                <div class="thought">Pero que los exámenes no eran de solo 10 preguntas… esto trae ¡200 PREGUNTAS! empezamos bien mi vida universitaria…</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Profesor Encargado</div>
+                    <p>Jóvenes recuerden utilizar solo lápiz para la respuesta, traten de no pasarse del círculo, sino esa elección será nula, ¡suerte!</p>
+                </div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>¿Lápiz? Enserio, en qué momento…</p>
+                </div>
+                
+                <div class="action">Correcto Taiki no llevo lápices al examen, solo lapiceros, en fin, problemas de universitario</div>
+                
+                <div class="action">Taiki se agarra los pelos quedando con un poco de ellos en las manos…</div>
+                
+                <div class="action">Persona de atrás, exclama susurrando.</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Persona misteriosa</div>
+                    <p>¡Oye chico! Toma…</p>
+                </div>
+                
+                <div class="action">Le entrega un Lápiz.</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>¡gracias!, ¿era chica...?, bueno a darle al examen, eh… por donde empiezo… Mate… Ciencia… Sociales… Lenguas…. – No sé ni como me llamo en estos momentos.</p>
+                </div>
+                
+                <div class="action">Podrá nuestro prota aprobar el examen, cuando no ha estudiado nada, las horas pasan…</div>
+                
+                <div class="section-break">2 horas después…</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>Bueno ya terminé, yo me retiro, no quiero saber nada de este maldito examen.</p>
+                </div>
+                
+                <div class="section-break">Fin del examen de admisión.</div>
+                
+                <div class="action">Cuando Taiki se dirigía a tomar el auto bus, se nota un mareado, de manera imprevista Taiki ve un destello blanco, quedando con un dolor de cabeza…</div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>Mier… da… que es esto, siento que la cabeza me va a explotar, exclamo con dolor y agarrándose la cabeza</p>
+                </div>
+                
+                <div class="action">Taiki se siente hasta atrás del auto bus.</div>
+                
+                <p>Durante el viaje de regreso Taiki nota un poco de sangre en su ropa, este se asusta… pero no tiene nada…</p>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>Pero que carajo acaba de pasar…</p>
+                </div>
+                
+                <div class="action">Después de eso, el viaje transcurre con tranquilidad.</div>
+                
+                <div class="section-break">12/01/2021 – De vuelta en casa.</div>
+                
+                <p>Taiki llega a su casa, sus padres lo estaban esperando.</p>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>Bueno ahora a esperar, solo queda confiar y que sea lo que Dios quiera…</p>
+                </div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Mamá</div>
+                    <p>Hay que ser positivos, sé que te aceptaran…</p>
+                </div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Papá</div>
+                    <p>¿y cuando sabremos que te aceptaron?</p>
+                </div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>La próxima semana a más tardar el 17 dijeron…</p>
+                </div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Mamá</div>
+                    <p>Bueno a esperar entonces, hare la comida, siéntate y cuéntanos como te fue…</p>
+                </div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Papá</div>
+                    <p>Hijo… ¿Usaste los preservativos?</p>
+                </div>
+                
+                <div class="dialogue">
+                    <div class="character-name">Taiki</div>
+                    <p>Papá…</p>
+                </div>
+                
+                <div class="action">Ambiente familiar, risas, buena vibra es lo que se respira en la casa de los Agatzuma, después de todo, que puede salir mal…</div>
+            </div>
+            
+            <div class="chapter-navigation">
+                <a href="#" class="nav-button"><i class="fas fa-arrow-left"></i> Capítulo Anterior</a>
+                <a href="#" class="nav-button next">Siguiente Capítulo <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modo lectura (pantalla completa) -->
+    <div class="reading-mode" id="reading-mode">
+        <button class="close-reading-mode" id="close-reading-mode">
+            <i class="fas fa-times"></i> Cerrar
+        </button>
+        <div class="chapter-text" id="reading-content"></div>
+    </div>
+
+    <!-- Botón para activar modo lectura -->
+    <div class="reading-mode-btn" id="reading-mode-btn" title="Modo lectura">
+        <i class="fas fa-book-open"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">© 2023 Tamashii no Ibuki. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Decoración japonesa -->
+    <div class="japanese-decoration decoration-1"></div>
+
+    
+</body>
+</html>
